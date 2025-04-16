@@ -4,12 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Witchbane — Сборка ПК на заказ</title>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(120deg, #0a0a0a, #1f1f1f);
+      background: url('https://images.unsplash.com/photo-1630844312863-e2036e1e05be?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
+      background-size: cover;
       color: #e0e0e0;
     }
     .container {
@@ -18,12 +20,15 @@
       padding: 40px;
       background: rgba(20, 20, 20, 0.85);
       border-radius: 16px;
-      box-shadow: 0 0 20px rgba(150, 0, 200, 0.4);
+      box-shadow: 0 0 30px rgba(150, 0, 200, 0.6);
+      backdrop-filter: blur(5px);
     }
     h1 {
       text-align: center;
       margin-bottom: 30px;
       color: #bb86fc;
+      font-family: 'UnifrakturCook', cursive;
+      font-size: 48px;
     }
     label {
       display: block;
@@ -50,14 +55,25 @@
       font-weight: bold;
       cursor: pointer;
       transition: 0.3s;
+      animation: pulse 2s infinite;
     }
     button:hover {
       background-color: #9a64d8;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0px #bb86fc; }
+      50% { box-shadow: 0 0 15px #bb86fc; }
+      100% { box-shadow: 0 0 0px #bb86fc; }
     }
     .success-message {
       margin-top: 20px;
       color: #03dac6;
       text-align: center;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .success-message.show {
+      opacity: 1;
     }
   </style>
 </head>
@@ -68,9 +84,9 @@
       <label for="name">Имя</label>
       <input type="text" id="name" name="name" required>
       <label for="phone">Телефон</label>
-      <input type="tel" id="phone" name="phone" required>
+      <input type="tel" id="phone" name="phone" pattern="[+0-9\s\-()]{10,}" title="Введите корректный номер" required>
       <button type="submit">Оставить заявку</button>
-      <div class="success-message" id="success-message" style="display: none;">
+      <div class="success-message" id="success-message">
         Заявка отправлена!
       </div>
     </form>
@@ -102,8 +118,8 @@
       });
 
       form.reset();
-      successMessage.style.display = 'block';
-      setTimeout(() => successMessage.style.display = 'none', 5000);
+      successMessage.classList.add('show');
+      setTimeout(() => successMessage.classList.remove('show'), 5000);
     });
   </script>
 </body>
