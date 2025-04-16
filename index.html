@@ -113,8 +113,14 @@
           text: message
         })
       })
-      .then(res => alert('Заявка отправлена! Мы свяжемся с тобой в Telegram.'))
-      .catch(err => alert('Ошибка отправки. Проверь соединение или напиши вручную.'));
+      .then(res => {
+        if (res.ok) {
+          alert('Заявка отправлена! Мы свяжемся с тобой в Telegram.');
+        } else {
+          throw new Error('Ошибка отправки');
+        }
+      })
+      .catch(err => alert(`Ошибка отправки: ${err.message}`));
     });
   </script>
 </body>
