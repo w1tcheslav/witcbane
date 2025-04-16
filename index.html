@@ -1,120 +1,109 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Witchbane | Сборка ПК под заказ</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Witchbane — Сборка ПК на заказ</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0e0e0e;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(120deg, #0a0a0a, #1f1f1f);
       color: #e0e0e0;
     }
-    header {
-      text-align: center;
-      padding: 3rem 1rem;
-      background: radial-gradient(circle, #1a1a1a, #0e0e0e);
+    .container {
+      max-width: 500px;
+      margin: 100px auto;
+      padding: 40px;
+      background: rgba(20, 20, 20, 0.85);
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(150, 0, 200, 0.4);
     }
     h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-      color: #9f4aff;
-      text-shadow: 0 0 15px #9f4aff;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #bb86fc;
     }
-    p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: 0 auto;
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
     }
-    form {
-      max-width: 600px;
-      margin: 2rem auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      background-color: #1c1c1c;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 15px #2d2d2d;
-    }
-    input, select, textarea, button {
-      padding: 0.8rem;
+    input[type="text"], input[type="tel"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
       border: none;
       border-radius: 8px;
-      font-size: 1rem;
-    }
-    input, select, textarea {
-      background-color: #2a2a2a;
-      color: #e0e0e0;
+      background: #333;
+      color: #fff;
     }
     button {
-      background-color: #9f4aff;
-      color: white;
+      width: 100%;
+      padding: 12px;
+      background-color: #bb86fc;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #0a0a0a;
+      font-weight: bold;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: 0.3s;
     }
     button:hover {
-      background-color: #bf61ff;
+      background-color: #9a64d8;
     }
-    .footer {
+    .success-message {
+      margin-top: 20px;
+      color: #03dac6;
       text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #555;
     }
   </style>
 </head>
 <body>
-  <header>
+  <div class="container">
     <h1>Witchbane</h1>
-    <p>Твоя идеальная сборка ПК. Мистически мощная. Реально доступная.</p>
-  </header>
-
-  <form id="leadForm">
-    <input type="text" name="name" placeholder="Имя" required />
-    <input type="text" name="contact" placeholder="Telegram или WhatsApp" required />
-    <input type="number" name="budget" placeholder="Бюджет (₽)" required />
-    <select name="purpose" required>
-      <option value="">Для чего нужен ПК?</option>
-      <option value="Игры">Игры</option>
-      <option value="Работа">Работа</option>
-      <option value="Монтаж и графика">Монтаж и графика</option>
-      <option value="Универсальный">Универсальный</option>
-    </select>
-    <textarea name="notes" rows="4" placeholder="Дополнительно (монитор есть, нужен Wi-Fi и т.д.)"></textarea>
-    <button type="submit">Отправить заявку</button>
-  </form>
-
-  <div class="footer">
-    &copy; 2025 Witchbane — ПК, собранные с тёмной магией 🔮
+    <form id="lead-form">
+      <label for="name">Имя</label>
+      <input type="text" id="name" name="name" required>
+      <label for="phone">Телефон</label>
+      <input type="tel" id="phone" name="phone" required>
+      <button type="submit">Оставить заявку</button>
+      <div class="success-message" id="success-message" style="display: none;">
+        Заявка отправлена!
+      </div>
+    </form>
   </div>
 
   <script>
-    const botToken = '7926605234:AAE3ureJNgjtF3MQnWG4PgRnMTi0jYnhqGM'; // ← сюда вставишь токен
-    const chatId = '474087748';   // ← сюда вставишь свой chat_id
+    const form = document.getElementById('lead-form');
+    const successMessage = document.getElementById('success-message');
 
-    document.getElementById('leadForm').addEventListener('submit', function(e) {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const name = form.name.value.trim();
+      const phone = form.phone.value.trim();
+      if (!name || !phone) return;
 
-      const formData = new FormData(this);
-      const message = `🧙 Новая заявка на сборку ПК\n` +
-        `Имя: ${formData.get('name')}\n` +
-        `Контакт: ${formData.get('contact')}\n` +
-        `Бюджет: ${formData.get('budget')}₽\n` +
-        `Назначение: ${formData.get('purpose')}\n` +
-        `Комментарий: ${formData.get('notes')}`;
+      const token = '7926605234:AAE3ureJNgjtF3MQnWG4PgRnMTi0jYnhqGM';
+      const chatId = '474087748';
+      const message = `📥 Новая заявка с сайта Witchbane\n\n🧑 Имя: ${name}\n📱 Телефон: ${phone}`;
 
-      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
           chat_id: chatId,
           text: message
         })
-      })
-      .then(res => alert('Заявка отправлена! Мы свяжемся с тобой в Telegram.'))
-      .catch(err => alert('Ошибка отправки. Проверь соединение или напиши вручную.'));
+      });
+
+      form.reset();
+      successMessage.style.display = 'block';
+      setTimeout(() => successMessage.style.display = 'none', 5000);
     });
   </script>
 </body>
