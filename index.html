@@ -4,10 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Witchbane | Сборка ПК под заказ</title>
-
-  <!-- Шрифт -->
+  <link rel="icon" type="image/png" href="favicon.png" />
   <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
-
   <style>
     body {
       margin: 0;
@@ -15,28 +13,23 @@
       background-color: #0e0e0e;
       color: #e0e0e0;
     }
-
     header {
       text-align: center;
       padding: 3rem 1rem;
       background: radial-gradient(circle, #1a1a1a, #0e0e0e);
     }
-
     h1 {
       font-size: 3rem;
       margin-bottom: 0.5rem;
       color: #9f4aff;
       text-shadow: 0 0 15px #9f4aff;
       font-family: 'MedievalSharp', cursive;
-      letter-spacing: 1px;
     }
-
     p {
       font-size: 1.2rem;
       max-width: 600px;
       margin: 0 auto;
     }
-
     form {
       max-width: 600px;
       margin: 2rem auto;
@@ -48,76 +41,30 @@
       border-radius: 12px;
       box-shadow: 0 0 15px #2d2d2d;
     }
-
     input, select, textarea, button {
       padding: 0.8rem;
       border: none;
       border-radius: 8px;
       font-size: 1rem;
     }
-
     input, select, textarea {
       background-color: #2a2a2a;
       color: #e0e0e0;
     }
-
     button {
       background-color: #9f4aff;
       color: white;
       cursor: pointer;
       transition: background 0.3s;
     }
-
     button:hover {
       background-color: #bf61ff;
     }
-
     .footer {
       text-align: center;
       padding: 2rem;
       font-size: 0.9rem;
       color: #555;
-    }
-
-    /* Модалка */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 100;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background: #1c1c1c;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 20px #9f4aff;
-      text-align: center;
-      font-size: 1.3rem;
-      font-family: 'MedievalSharp', cursive;
-      color: #e0e0e0;
-      max-width: 400px;
-      line-height: 1.6;
-    }
-
-    .modal-content button {
-      margin-top: 1.5rem;
-      background-color: #9f4aff;
-      border: none;
-      padding: 0.6rem 1.5rem;
-      font-size: 1.1rem;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .modal-content button:hover {
-      background-color: #bf61ff;
     }
   </style>
 </head>
@@ -146,27 +93,14 @@
     &copy; 2025 Witchbane — ПК, собранные с тёмной магией 🔮
   </div>
 
-  <!-- Модальное окно -->
-  <div class="modal" id="successModal">
-    <div class="modal-content">
-      <div>🔮 Заявка отправлена в магический круг Witchbane!</div>
-      <div>Скоро мы свяжемся с тобой сквозь завесу Telegram...</div>
-      <button id="closeModal">Понял(а)</button>
-    </div>
-  </div>
-
   <script>
-    const botToken = '7926605234:AAE3ureJNgjtF3MQnWG4PgRnMTi0jYnhqGM';
-    const chatId = '474087748';
+    const botToken = '7926605234:AAE3ureJNgjtF3MQnWG4PgRnMTi0jYnhqGM'; // ← сюда вставишь токен
+    const chatId = '474087748';   // ← сюда вставишь свой chat_id
 
-    const form = document.getElementById('leadForm');
-    const modal = document.getElementById('successModal');
-    const closeBtn = document.getElementById('closeModal');
-
-    form.addEventListener('submit', function(e) {
+    document.getElementById('leadForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
-      const formData = new FormData(form);
+      const formData = new FormData(this);
       const message = `🧙 Новая заявка на сборку ПК\n` +
         `Имя: ${formData.get('name')}\n` +
         `Контакт: ${formData.get('contact')}\n` +
@@ -184,17 +118,13 @@
       })
       .then(res => {
         if (res.ok) {
-          form.reset(); // очищаем форму
-          modal.style.display = 'flex'; // показываем модалку
+          this.reset();
+          alert("🔮 Тьма услышала твой зов...\n\nМы свяжемся с тобой в ближайшее время!");
         } else {
           throw new Error('Ошибка отправки');
         }
       })
       .catch(err => alert(`Ошибка отправки: ${err.message}`));
-    });
-
-    closeBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
     });
   </script>
 </body>
