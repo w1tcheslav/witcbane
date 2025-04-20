@@ -7,14 +7,30 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
   <style>
-    body {
+    body, html {
       margin: 0;
+      padding: 0;
+      height: 100%;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #e0e0e0;
-      background: 
-        linear-gradient(rgba(14, 14, 14, 0.85), rgba(14, 14, 14, 0.9)),
-        url('fon.png') no-repeat center center fixed;
-      background-size: cover;
+    }
+    #video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(14, 14, 14, 0.85);
+      z-index: -1;
     }
     header {
       text-align: center;
@@ -44,12 +60,7 @@
       font-size: 3rem;
       margin-bottom: 0.5rem;
       color: #9f4aff;
-      text-shadow: 
-        2px 2px 0 #000,
-        -2px -2px 0 #000,
-        2px -2px 0 #000,
-        -2px 2px 0 #000,
-        0 0 15px #9f4aff;
+      text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 0 0 15px #9f4aff;
       font-family: 'MedievalSharp', cursive;
       white-space: nowrap;
     }
@@ -97,8 +108,19 @@
       background-color: rgba(14, 14, 14, 0.7);
       backdrop-filter: blur(4px);
     }
-
-    /* Мобильная версия */
+    .info-block {
+      max-width: 700px;
+      margin: 2rem auto;
+      background-color: rgba(28, 28, 28, 0.85);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #2d2d2d;
+      backdrop-filter: blur(4px);
+      line-height: 1.6;
+    }
+    .info-block h2 {
+      color: #9f4aff;
+    }
     @media (max-width: 768px) {
       .header-container {
         gap: 10px;
@@ -112,10 +134,9 @@
       }
       p {
         font-size: 1rem;
-        display: none; /* Скрываем описание на мобильных */
+        display: none;
       }
     }
-
     @media (max-width: 480px) {
       .header-image {
         height: 80px;
@@ -127,6 +148,10 @@
   </style>
 </head>
 <body>
+  <video autoplay muted loop id="video-bg">
+    <source src="bg.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
   <header>
     <div class="header-container">
       <img src="zas.png" alt="Witchbane" class="header-image" />
@@ -153,8 +178,37 @@
     <button type="submit">Отправить заявку</button>
   </form>
 
+  <div class="info-block">
+    <h2>Почему выбирают меня?</h2>
+    <ul>
+      <li>Работаю “своим для своих” — без лишней рекламы</li>
+      <li>Доставка за 3–7 дней из Китая</li>
+      <li>Предоплата и полная прозрачность на каждом этапе</li>
+      <li>Подбор комплектующих по бюджету</li>
+      <li>Скрины, отзывы и трек — всё по делу</li>
+    </ul>
+    <h2>Что можно заказать?</h2>
+    <ul>
+      <li>Игровые приставки (Nintendo, Steam Deck и др.)</li>
+      <li>Смартфоны (Xiaomi, OnePlus, ROG и др.)</li>
+      <li>Комплектующие (GPU, CPU, SSD и др.)</li>
+      <li>Сборка ПК под ключ</li>
+      <li>Мониторы, наушники, клавиатуры</li>
+    </ul>
+    <h2>Как всё происходит?</h2>
+    <ol>
+      <li>Оставляешь заявку или пишешь в Telegram</li>
+      <li>Обсуждаем, что нужно</li>
+      <li>Я уточняю цену и срок</li>
+      <li>Ты оплачиваешь — я везу</li>
+      <li>Ты получаешь — и радуешься</li>
+    </ol>
+  </div>
+
   <div class="footer">
-    &copy; 2025 Witchbane — ПК, собранные с тёмной магией 🔮
+    Во имя 120fps, Ryzen и RTX — не лагай, аминь.<br>
+    <img src="logo.png" alt="Witchbane Logo" style="height: 40px; margin: 1rem 0;" /><br>
+    &copy; 2025 Witchbane. Все права защищены.
   </div>
 
   <script>
