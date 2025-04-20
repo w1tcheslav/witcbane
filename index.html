@@ -121,6 +121,28 @@
     .info-block h2 {
       color: #9f4aff;
     }
+    .telegram-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #9f4aff;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(159, 74, 255, 0.4);
+      z-index: 100;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .telegram-btn:hover {
+      background-color: #bf61ff;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(159, 74, 255, 0.6);
+    }
     @media (max-width: 768px) {
       .header-container {
         gap: 10px;
@@ -136,6 +158,12 @@
         font-size: 1rem;
         display: none;
       }
+      .telegram-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        bottom: 20px;
+        right: 20px;
+      }
     }
     @media (max-width: 480px) {
       .header-image {
@@ -143,6 +171,12 @@
       }
       h1 {
         font-size: 1.5rem;
+      }
+      .telegram-btn {
+        padding: 10px 15px;
+        font-size: 0.8rem;
+        bottom: 15px;
+        right: 15px;
       }
     }
   </style>
@@ -152,6 +186,12 @@
     <source src="bg.mp4" type="video/mp4">
   </video>
   <div class="overlay"></div>
+  
+  <!-- Кнопка "Призвать меня" - здесь нужно вставить ссылку на ваш Telegram -->
+  <a href="https://t.me/W1tcheslav" class="telegram-btn" target="_blank">
+    Призвать меня
+  </a>
+
   <header>
     <div class="header-container">
       <img src="zas.png" alt="Witchbane" class="header-image" />
@@ -181,7 +221,7 @@
   <div class="info-block">
     <h2>Почему выбирают меня?</h2>
     <ul>
-      <li>Работаю “своим для своих” — без лишней рекламы</li>
+      <li>Работаю "своим для своих" — без лишней рекламы</li>
       <li>Доставка за 3–7 дней из Китая</li>
       <li>Предоплата и полная прозрачность на каждом этапе</li>
       <li>Подбор комплектующих по бюджету</li>
