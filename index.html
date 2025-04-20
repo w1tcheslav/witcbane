@@ -143,6 +143,63 @@
       transform: translateY(-3px);
       box-shadow: 0 6px 20px rgba(159, 74, 255, 0.6);
     }
+    .offer-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #9f4aff;
+      text-decoration: underline;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .offer-btn:hover {
+      color: #bf61ff;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .modal-content {
+      background-color: rgba(28, 28, 28, 0.95);
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(159, 74, 255, 0.3);
+      position: relative;
+    }
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.5rem;
+      color: #9f4aff;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .offer-text {
+      max-height: 70vh;
+      overflow-y: auto;
+      padding-right: 15px;
+    }
+    .offer-text h2 {
+      color: #9f4aff;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .offer-text ul, .offer-text ol {
+      padding-left: 1.5rem;
+    }
     @media (max-width: 768px) {
       .header-container {
         gap: 10px;
@@ -164,6 +221,9 @@
         bottom: 20px;
         right: 20px;
       }
+      .modal-content {
+        padding: 1.5rem;
+      }
     }
     @media (max-width: 480px) {
       .header-image {
@@ -178,6 +238,9 @@
         bottom: 15px;
         right: 15px;
       }
+      .modal-content {
+        padding: 1rem;
+      }
     }
   </style>
 </head>
@@ -187,8 +250,8 @@
   </video>
   <div class="overlay"></div>
   
-  <!-- Кнопка "Призвать меня" - здесь нужно вставить ссылку на ваш Telegram -->
-  <a href="https://t.me/W1tcheslav" class="telegram-btn" target="_blank">
+  <!-- Кнопка "Призвать меня" -->
+  <a href="https://t.me/ВАШ_TELEGRAM" class="telegram-btn" target="_blank">
     Призвать меня
   </a>
 
@@ -246,9 +309,69 @@
   </div>
 
   <div class="footer">
-    Во имя 120 FPS, Ryzen и RTX, да падут все лаги перед мощью машины!<br>
+    Во имя 120fps, Ryzen и RTX — не лагай, аминь.<br>
     <img src="logo.png" alt="Witchbane Logo" style="height: 40px; margin: 1rem 0;" /><br>
+    <span class="offer-btn" id="offerBtn">Публичная оферта</span><br>
     &copy; 2025 Witchbane. Все права защищены.
+  </div>
+
+  <!-- Модальное окно с офертой -->
+  <div id="offerModal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" id="closeOffer">&times;</button>
+      <div class="offer-text">
+        <h2>ДОГОВОР-ОФЕРТА</h2>
+        <p>на оказание информационно-консультационных и логистических услуг</p>
+
+        <h2>1. ОБЩИЕ ПОЛОЖЕНИЯ</h2>
+        <p>1.1. Настоящий договор является публичной офертой в соответствии со ст. 437 ГК РФ. Исполнитель – Логвинов Вячеслав Вячеславович, зарегистрированный(ая) в качестве плательщика налога на профессиональный доход (самозанятый), ИНН 540139900260, оказывает услуги на условиях настоящего договора.</p>
+        <p>1.2. Клиент – физическое или юридическое лицо, принявшее условия оферты путем оплаты услуг.</p>
+        <p>1.3. Услуги оказываются на основании описания, размещенного на сайте: https://w1tcheslav.github.io/witcbane.</p>
+
+        <h2>2. ПРЕДМЕТ ДОГОВОРА</h2>
+        <p>2.1. Исполнитель оказывает Клиенту следующие услуги:</p>
+        <ul>
+          <li>Логистическое сопровождение – организация доставки техники и комплектующих от третьих лиц;</li>
+          <li>Подготовка, сборка и наладка электронных компонентов;</li>
+          <li>Информационная поддержка – консультации по подбору, совместимости и функциональности комплектующих.</li>
+        </ul>
+        <p>2.2. Исполнитель действует как агент Клиента при закупке комплектующих и не является их продавцом. Все права и риски переходят к Клиенту напрямую от поставщиков.</p>
+        <p>2.3. Оплата комплектующих осуществляется:</p>
+        <ul>
+          <li>либо Клиентом напрямую поставщику (по согласованию с Исполнителем),</li>
+          <li>либо возмещается Исполнителю в размере фактических затрат (без наценки).</li>
+        </ul>
+        <p>2.4. Исполнитель предоставляет Клиенту документы, подтверждающие расходы (чеки, счета и т. д.).</p>
+
+        <h2>3. ПОРЯДОК ОКАЗАНИЯ УСЛУГ</h2>
+        <p>3.1. Услуги оказываются после полной предоплаты (если иное не согласовано).</p>
+        <p>3.2. Клиент предоставляет необходимые данные для выполнения заказа.</p>
+
+        <h2>4. ОПЛАТА</h2>
+        <p>4.1. Стоимость услуг согласуется отдельно и указывается в заявке.</p>
+        <p>4.2. Оплата производится:</p>
+        <ul>
+          <li>по реквизитам Исполнителя (для возмещения затрат);</li>
+          <li>через систему быстрых платежей;</li>
+          <li>напрямую поставщику (по договоренности).</li>
+        </ul>
+
+        <h2>5. СРОКИ</h2>
+        <p>5.1. Срок оказания услуг – от 7 до 21 рабочего дня.</p>
+        <p>5.2. Срок может быть увеличен из-за задержек поставщиков или перевозчиков.</p>
+
+        <h2>6. ГАРАНТИИ И ОТВЕТСТВЕННОСТЬ</h2>
+        <p>6.1. Исполнитель не отвечает за качество комплектующих, так как не является их продавцом.</p>
+        <p>6.2. В случае брака Клиент обращается напрямую к поставщику, а Исполнитель оказывает содействие в возврате/обмене.</p>
+        <p>6.3. Возврат средств возможен только за неоказанные услуги.</p>
+
+        <h2>7. ПРОЧИЕ УСЛОВИЯ</h2>
+        <p>7.1. Клиент соглашается на обработку персональных данных в рамках договора.</p>
+        <p>7.2. Споры решаются путем переговоров, а при недостижении согласия – в суде по месту регистрации Исполнителя.</p>
+
+        <p>Принятие оферты происходит с момента оплаты услуг.</p>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -283,6 +406,28 @@
         }
       })
       .catch(err => alert(`Ошибка отправки: ${err.message}`));
+    });
+
+    // Обработка модального окна с офертой
+    const offerBtn = document.getElementById('offerBtn');
+    const offerModal = document.getElementById('offerModal');
+    const closeOffer = document.getElementById('closeOffer');
+
+    offerBtn.addEventListener('click', () => {
+      offerModal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeOffer.addEventListener('click', () => {
+      offerModal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === offerModal) {
+        offerModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
     });
   </script>
 </body>
